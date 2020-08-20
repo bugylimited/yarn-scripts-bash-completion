@@ -1,0 +1,12 @@
+#/usr/bin/env bash
+_yarn_completions()
+{
+	FILE="$PWD/package.json"
+	if [[ -f $FILE ]]
+	then
+		YARN_SCRIPTS=$(cat $FILE | jq -c '.scripts | keys | .[]')
+		COMPREPLY=($(compgen -W "$YARN_SCRIPTS" "${COMP_WORDS[1]}"))
+	fi
+}
+
+complete -F _yarn_completions yarn
