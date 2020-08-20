@@ -2,7 +2,7 @@
 _yarn_completions()
 {
 	FILE="$PWD/package.json"
-	if [[ -f $FILE ]]
+	if [[ -f $FILE && -f "$PWD/yarn.lock" ]]
 	then
 		YARN_SCRIPTS=$(cat $FILE | jq -c '.scripts | keys | .[]')
 		COMPREPLY=($(compgen -W "$YARN_SCRIPTS" "${COMP_WORDS[1]}"))
